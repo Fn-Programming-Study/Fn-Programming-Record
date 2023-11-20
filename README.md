@@ -7,6 +7,12 @@
 
 ![image](https://github.com/Fn-Programming-Study/Fn-Programming-Record/assets/116826162/14df7450-9b5a-43fe-9332-ba3100c08720)
 
+## 기간 및 장소
+기간 : 2023-12 ~ 2024-1 예정
+장소 : 여의도 회의실
+
+## 진행방식
+
 
 ## 구성원
 
