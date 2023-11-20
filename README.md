@@ -16,7 +16,7 @@
 
 ## 📚 도서
 
-<img src="https://github.com/Fn-Programming-Study/Fn-Programming-Record/assets/116826162/14df7450-9b5a-43fe-9332-ba3100c08720" width="300" height="700"/>
+<img src="https://github.com/Fn-Programming-Study/Fn-Programming-Record/assets/116826162/14df7450-9b5a-43fe-9332-ba3100c08720" width="300" />
 
 <br/>
 <br/>
