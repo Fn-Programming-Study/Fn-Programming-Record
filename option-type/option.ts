@@ -47,7 +47,7 @@ export const fromUndefined: FromUndefined = (a) => {
 //     let saleText = '';
 //     let discountPrice = 0;
 //     if (item.discountPrice !== undefined) {
-//         saleText = 'SALE';
+//         saleText = `SALE ${discountPrice}`;
 //         discountPrice = item.discountPrice;
 //     }
 //     return saleText;
@@ -67,20 +67,32 @@ export const fromUndefined: FromUndefined = (a) => {
  * 이것이 계속 반복되는 것을 확인할 수 있음
  */
 
+export const getOrElse = <A>(option: Option<A>, defaultValue: A): A => {
+    // 값이 없으면 지정된 값을 사용
+    // 값이 있다면 해당 값을 사용
+    return isSome(option) ? option.value : defaultValue;
+}
+
 const stockItem = (item: Item): string => {
     let saleText = '';
-    let discountPrice = 0;
-    if (item.discountPrice !== undefined) {
-        saleText = 'SALE';
-        discountPrice = item.discountPrice;
+    // if (item.discountPrice !== undefined) {
+    //     saleText = 'SALE';
+    //     discountPrice = item.discountPrice;
+    // }
+    const optionDiscountPrice = fromUndefined(item.discountPrice);
+    const discountPrice = getOrElse(optionDiscountPrice, 0);
+
+    if (isSome(optionDiscountPrice)) {
+        saleText = `SALE ${discountPrice}`;
     }
+
     return saleText;
 }
 
 const totalDiscountPrice = (item: Item): number => {
-    let discountPrice = 0;
-    if (item.discountPrice !== undefined) {
-        discountPrice = item.discountPrice;
-    }
+    // 신 문법
+    // item.discountPrice |> fromUndefined($) |> getOrElse($, 0);
+    const discountPrice = getOrElse(fromUndefined(item.discountPrice), 0);
+    
     return discountPrice;
 }
