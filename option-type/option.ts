@@ -96,3 +96,50 @@ const totalDiscountPrice = (item: Item): number => {
     
     return discountPrice;
 }
+
+// option 의 map 구현하기
+export const map = <A, B>(option: Option<A>, f: (a: A) => B): Option<B> => {
+    // 값이 있으면 값을 함수에 적용한후 반환한다.
+    if (isSome(option)) {
+        return some(f(option.value));
+    }
+    // 값이 없으면 없는 상태를 유지한다.
+    return none();
+}
+
+export const mapOrElse = <A, B>(
+    oa: Option<A>,
+    f: (a: A) => B,
+    defaultValue: B,
+): B => {
+    return getOrElse(map(oa, f), defaultValue);
+}
+
+
+const newStockItem = (item: Item): string => {
+    
+    // if (item.discountPrice !== undefined) {
+    //     saleText = 'SALE';
+    //     discountPrice = item.discountPrice;
+    // }
+    const optionDiscountPrice = fromUndefined(item.discountPrice);
+    const discountPrice = getOrElse(optionDiscountPrice, 0);
+
+    /*
+    if (isSome(optionDiscountPrice)) {
+        saleText = `SALE ${discountPrice}`;
+    }
+    */
+
+    // const optionSaleText = map(optionDiscountPrice, (discountPrice) => `SALE ${discountPrice}`);
+    // const saleText = getOrElse(optionSaleText, '');
+
+    // const saleText = getOrElse(map(optionDiscountPrice, (discountPrice) => `SALE ${discountPrice}`), "");
+    const saleText = mapOrElse(
+        optionDiscountPrice, 
+        (discountPrice) => `SALE ${discountPrice}`, 
+        ''
+    );
+
+    return saleText;
+}
